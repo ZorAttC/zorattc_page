@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="ZorAttC的个人主页 - 哈尔滨工业大学（深圳）控制科学与工程硕士">
+    <meta name="keywords" content="ZorAttC, 哈尔滨工业大学, 控制科学与工程, 机器人, 人工智能">
+    <title>ZorAttC的个人主页</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --text-color: #333;
+            --background-color: #f8f9fa;
+            --card-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding: 10px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+            background-color: white;
+            box-shadow: var(--card-shadow);
+            border-radius: 8px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid var(--secondary-color);
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+        }
+
+        .profile-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+        }
+
+        .education-item, .skill-item {
+            margin-bottom: 12px;
+            padding: 12px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .project-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 12px;
+            transition: all 0.3s ease;
+            background: white;
+            box-shadow: var(--card-shadow);
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .skill-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .star {
+            color: #f1c40f;
+        }
+
+        .publication-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .publication-item h3 {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            margin-bottom: 8px;
+        }
+
+        .publication-item p {
+            margin-bottom: 8px;
+        }
+
+        .publication-item a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .publication-item a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .video-container {
+                margin-bottom: 10px;
+            }
+
+            .project-card {
+                padding: 10px;
+            }
+
+            .education-item, .skill-item {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 20px 0;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .skill-rating {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ZorAttC的个人主页</h1>
+            <p>哈尔滨工业大学（深圳）控制科学与工程硕士在读</p>
+        </header>
+
+        <section class="profile-section">
+            <h2 class="section-title">个人简介</h2>
+            <p>我目前居住在广东深圳，在哈尔滨工业大学（深圳）攻读控制科学与工程硕士学位。我本科也毕业于哈尔滨工业大学（深圳）。现在是[nROS-lab](https://www.nrs-lab.com/)的成员，从事视觉-语言-动作模型和开放词汇移动操作的研究和项目。</p>
+        </section>
+
+        <section class="profile-section">
+            <h2 class="section-title">教育与实习经历</h2>
+            <div class="education-item">
+                <h3>实习经历</h3>
+                <p><strong>LimX Dynamics</strong> - 具身智能与操作组 (2024/11--2025/04)</p>
+            </div>
+            <div class="education-item">
+                <h3>硕士</h3>
+                <p>哈尔滨工业大学（深圳） - 控制科学与工程 (2024/09--至今)</p>
+            </div>
+            <div class="education-item">
+                <h3>本科</h3>
+                <p>哈尔滨工业大学（深圳） - 自动化 (2020/09--2024/06)</p>
+            </div>
+        </section>
+
+        <section class="profile-section">
+            <h2 class="section-title">技能</h2>
+            <div class="skill-item">
+                <div class="skill-rating">
+                    <span>Python</span>
+                    <span class="star">⭐⭐⭐⭐</span>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-rating">
+                    <span>C++</span>
+                    <span class="star">⭐⭐⭐</span>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-rating">
+                    <span>Pytorch</span>
+                    <span class="star">⭐⭐⭐</span>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-rating">
+                    <span>ROS</span>
+                    <span class="star">⭐⭐⭐⭐</span>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-rating">
+                    <span>CMake/xmake</span>
+                    <span class="star">⭐⭐⭐</span>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-rating">
+                    <span>OpenGL</span>
+                    <span class="star">⭐⭐</span>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-rating">
+                    <span>Web开发(JS/HTML/CSS)</span>
+                    <span class="star">⭐⭐</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-section">
+            <h2 class="section-title">项目经历</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>Apple Vision Pro Teleoperation</h3>
+                    <div class="video-container">
+                        <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=113062933695302&bvid=BV173Hqe2EW3&cid=25694374217&p=1" scrolling="no" border="0" frameborder="0" framespacing="0"></iframe>
+                    </div>
+                    <p>我们实现了TeleVison的演示。使用realman RM65机械臂和Inspire灵巧手构建实验平台。遥操作系统可用于收集双臂移动平台的关节和传感器数据，用于模仿学习和具身AI。手部重定向使用dexipilot解决。消息通信通过gRPC实现。相机流媒体依赖于WebRTC。</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>LimX VGM</h3>
+                    <div class="video-container">
+                        <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114001769930414&bvid=BV1GHKKeyE1N&cid=28388295236&p=1" scrolling="no" border="0" frameborder="0" framespacing="0"></iframe>
+                    </div>
+                    <p>基于视频生成大模型的具身操作算法LimX VGM：通过对现有视频生成大模型进行人类操作视频数据的后训练，仅需场景图像和操作任务指令作为提示，即可实现任务理解和分解、物体操作轨迹生成、机器人操作执行的全过程。整个过程使用零真实机器样本数据，实现跨多平台的泛化。这是国内首次将人类操作数据直接应用于机器人操作。</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>VR沉浸式可视化</h3>
+                    <div class="video-container">
+                        <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=706447463&bvid=BV1eQ4y1t7cz&cid=1345809450&p=1" scrolling="no" border="0" frameborder="0" framespacing="0"></iframe>
+                    </div>
+                    <p>对于复杂和危险的灾后场景，有时现有机器人的自主智能无法完全依赖，需要人工干预。我们使用R3LIVE作为里程计，为VR用户提供RGB彩色点云，实时可视化机器人所在场景。我使用OpenXR进行VR开发编程，实现高性能渲染。</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>摄像头环视拼接</h3>
+                    <img src="../pics/sparklink.png" alt="摄像头环视拼接" style="width:100%;">
+                    <p>首届"星闪杯"高校应用挑战赛是面向高校开发者的命题应用挑战赛，由国际星闪联盟联合多所高校联合举办。赛题为摄像头环视拼接系统的开发，在指定平台上完成无人车鸟瞰图的融合拼接，要求拼接处无明显痕迹，图像全局亮度均衡，图像无明显畸变，无明显延时，运行流畅稳定。我们使用C++进行程序开发，并且进行了多线程优化与CUDA加速，最终实现了每帧28ms的处理速度。来自哈尔滨工业大学（深圳）的1504Ders队获得了首届"星闪杯"高校应用挑战赛的全国第二名。</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>Tetris Robot</h3>
+                    <div class="video-container">
+                        <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=613376126&bvid=BV1Uh4y1J7hN&cid=1124218431&p=1" scrolling="no" border="0" frameborder="0" framespacing="0"></iframe>
+                    </div>
+                    <p>我们创建了一个玩俄罗斯方块的机器人。使用机械臂和RGB相机，它能够根据指定规则拾取俄罗斯方块并将其放置在盘子上。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-section">
+            <h2 class="section-title">发表论文</h2>
+            <div class="publication-item">
+                <h3>Real-Time LiDAR Point Cloud Compression and Transmission for Resource-constrained Robots</h3>
+                <p><em>Yuhao Cao, Yu Wang and Haoyao Chen (ICRA2025 accepted)</em></p>
+                <p>
+                    <a href="https://github.com/ZorAttC/RCPCC">arxiv</a> |
+                    <a href="https://www.bilibili.com/video/BV1XrZHYqEBE/?vd_source=5afc90db9c8787a059e3d9c402d20d33">bilibili</a> |
+                    <a href="https://github.com/HITSZ-NRSL/RCPCC">github</a>
+                </p>
+            </div>
+        </section>
+    </div>
+</body>
+</html> 
