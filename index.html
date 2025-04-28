@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="ZorAttC的个人主页 - 哈尔滨工业大学（深圳）控制科学与工程硕士">
-    <meta name="keywords" content="ZorAttC, 哈尔滨工业大学, 控制科学与工程, 机器人, 人工智能">
-    <title>ZorAttC的个人主页</title>
+    <meta name="description" content="ZorAttC's Personal Website - Master's Student in Control Science and Engineering at Harbin Institute of Technology (Shenzhen)">
+    <meta name="keywords" content="ZorAttC, Harbin Institute of Technology, Control Science and Engineering, Robotics, Artificial Intelligence">
+    <title>ZorAttC's Personal Website</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -13,6 +15,13 @@
             --text-color: #333;
             --background-color: #f8f9fa;
             --card-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            --profile-size: 150px;
+            --sidebar-width: 280px;
+            --link-color: #3498db;
+            --link-hover-color: #2980b9;
+            --max-content-width: 1400px;
+            --content-padding: 40px;
+            --section-spacing: 30px;
         }
 
         * {
@@ -26,8 +35,33 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--background-color);
-            padding: 10px;
             -webkit-font-smoothing: antialiased;
+        }
+
+        .page-wrapper {
+            display: flex;
+            min-height: 100vh;
+            max-width: var(--max-content-width);
+            margin: 0 auto;
+            padding: 0 var(--content-padding);
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 20px;
+            background-color: var(--background-color);
+            max-width: calc(var(--max-content-width) - var(--sidebar-width) - var(--content-padding) * 2);
         }
 
         .container {
@@ -39,288 +73,652 @@
             border-radius: 8px;
         }
 
-        header {
+        .sidebar-header {
             text-align: center;
-            padding: 30px 0;
-            border-bottom: 2px solid var(--secondary-color);
-            margin-bottom: 25px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        h1 {
-            color: var(--primary-color);
+        .profile-image-container {
+            width: var(--profile-size);
+            height: var(--profile-size);
+            margin: 0 auto 20px;
+            position: relative;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            border: 3px solid white;
+            background: #f8f9fa;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+
+        .sidebar-title {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+        }
+
+        .sidebar-section {
+            margin: 20px 0;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-section-title {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
             margin-bottom: 15px;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
         }
 
-        .profile-section {
-            margin-bottom: 30px;
+        .contact-info {
+            list-style: none;
         }
 
-        .section-title {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
+        .contact-info li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
         }
 
-        .education-item, .skill-item {
-            margin-bottom: 12px;
-            padding: 12px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            box-shadow: var(--card-shadow);
+        .contact-info i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
         }
 
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        .social-links {
+            display: flex;
+            justify-content: center;
             gap: 15px;
             margin-top: 15px;
         }
 
-        .project-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 12px;
-            transition: all 0.3s ease;
-            background: white;
-            box-shadow: var(--card-shadow);
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
         }
 
-        .project-card:hover {
-            transform: translateY(-3px);
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .skills-list {
+            list-style: none;
+        }
+
+        .skills-list li {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .skill-name {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .skill-stars {
+            color: #f1c40f;
+        }
+
+        @media (max-width: 1200px) {
+            :root {
+                --max-content-width: 1200px;
+                --content-padding: 30px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            :root {
+                --max-content-width: 992px;
+                --content-padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-wrapper {
+                flex-direction: column;
+                padding: 0;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-content {
+                margin-left: 0;
+                max-width: 100%;
+            }
+
+            :root {
+                --content-padding: 15px;
+                --section-spacing: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --profile-size: 100px;
+            }
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: var(--section-spacing);
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-section:hover {
+            transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .video-container {
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--secondary-color);
             position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            margin-bottom: 12px;
-            border-radius: 4px;
-            background: #000;
         }
 
-        .video-container iframe {
+        .section-icon {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-right: 15px;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin: 0;
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title-text {
+            margin-right: 8px;
+        }
+
+        .section-title-avatar {
+            width: 60px;
+            height: auto;
+            margin-left: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            -ms-interpolation-mode: nearest-neighbor;
+        }
+
+        .section-title-avatar img {
+            width: 100%;
+            height: auto;
+            display: block;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            -ms-interpolation-mode: nearest-neighbor;
+        }
+
+        @media (max-width: 768px) {
+            .section-title-avatar {
+                width: 45px;
+            }
+        }
+
+        .education-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .education-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--secondary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+        }
+
+        .timeline-item p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            justify-content: space-between;
+        }
+
+        .timeline-item .company-info {
+            flex: 1;
+            margin-right: 15px;
+        }
+
+        .timeline-date {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .project-media {
+            position: relative;
+            padding-bottom: 56.25%;
+            background: #000;
+            border-radius: 12px 12px 0 0;
+            overflow: hidden;
+        }
+
+        .project-media iframe,
+        .project-media img {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             border: none;
+            object-fit: cover;
         }
 
-        .skill-rating {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: clamp(0.9rem, 2vw, 1rem);
+        .project-content {
+            padding: 20px;
         }
 
-        .star {
-            color: #f1c40f;
-        }
-
-        .publication-item {
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 5px;
+        .project-title {
+            color: var(--primary-color);
+            font-size: 1.4rem;
             margin-bottom: 15px;
+        }
+
+        .project-description {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .publication-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
             box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .publication-item h3 {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            margin-bottom: 8px;
+        .publication-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .publication-item p {
-            margin-bottom: 8px;
+        .publication-title {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
         }
 
-        .publication-item a {
+        .publication-meta {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .publication-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .publication-links a {
             color: var(--secondary-color);
             text-decoration: none;
-            margin: 0 5px;
+            padding: 8px 15px;
+            border: 1px solid var(--secondary-color);
+            border-radius: 5px;
+            transition: all 0.3s ease;
         }
 
-        .publication-item a:hover {
-            text-decoration: underline;
+        .publication-links a:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0 2px;
+        }
+
+        a:hover {
+            color: var(--link-hover-color);
+        }
+
+        a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--link-color);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .project-description a {
+            color: var(--link-color);
+            font-weight: 500;
+        }
+
+        .project-description a:hover {
+            color: var(--link-hover-color);
+        }
+
+        .company-link {
+            color: var(--link-color);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .company-link:hover {
+            color: var(--link-hover-color);
+        }
+
+        .company-link::after {
+            display: none;
         }
 
         @media (max-width: 768px) {
-            body {
-                padding: 5px;
-            }
-
-            .container {
-                padding: 10px;
-            }
-
-            .project-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .video-container {
-                margin-bottom: 10px;
-            }
-
-            .project-card {
-                padding: 10px;
-            }
-
-            .education-item, .skill-item {
-                padding: 10px;
+            .timeline-date {
+                font-size: 0.8rem;
+                padding: 3px 6px;
             }
         }
 
-        @media (max-width: 480px) {
-            header {
-                padding: 20px 0;
-            }
+        .education-section {
+            position: relative;
+        }
 
-            .section-title {
-                font-size: 1.3rem;
-            }
+        .education-content {
+            position: relative;
+            max-width: 100%;
+        }
 
-            .skill-rating {
-                flex-direction: column;
-                align-items: flex-start;
+        @media (max-width: 992px) {
+            .education-content {
+                max-width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>ZorAttC的个人主页</h1>
-            <p>哈尔滨工业大学（深圳）控制科学与工程硕士在读</p>
-        </header>
+    <div class="page-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="profile-image-container">
+                    <img src="images/profile.jpg" alt="Profile Photo" class="profile-image">
+                </div>
+                <h1 class="sidebar-title">曹宇豪 Yuhao Cao</h1>
+                <p class="sidebar-subtitle">Intrested in DL&RL and robotics.</p>
+            </div>
 
-        <section class="profile-section">
-            <h2 class="section-title">个人简介</h2>
-            <p>我目前居住在广东深圳，在哈尔滨工业大学（深圳）攻读控制科学与工程硕士学位。我本科也毕业于哈尔滨工业大学（深圳）。现在是[nROS-lab](https://www.nrs-lab.com/)的成员，从事视觉-语言-动作模型和开放词汇移动操作的研究和项目。</p>
-        </section>
+            <div class="sidebar-section">
+                <h2 class="sidebar-section-title">Contact Information</h2>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> 1720049199@qq.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Shenzhen, Guangdong</li>
+                    <li><i class="fas fa-university"></i> Harbin Institute of Technology (Shenzhen)</li>
+                </ul>
+            </div>
 
-        <section class="profile-section">
-            <h2 class="section-title">教育与实习经历</h2>
-            <div class="education-item">
-                <h3>实习经历</h3>
-                <p><strong>LimX Dynamics</strong> - 具身智能与操作组 (2024/11--2025/04)</p>
+            <div class="sidebar-section">
+                <h2 class="sidebar-section-title">Skills</h2>
+                <ul class="skills-list">
+                    <li>
+                        <span class="skill-name">Python</span>
+                        <span class="skill-stars">⭐⭐⭐⭐</span>
+                    </li>
+                    <li>
+                        <span class="skill-name">C++</span>
+                        <span class="skill-stars">⭐⭐⭐</span>
+                    </li>
+                    <li>
+                        <span class="skill-name">Pytorch</span>
+                        <span class="skill-stars">⭐⭐⭐</span>
+                    </li>
+                    <li>
+                        <span class="skill-name">ROS</span>
+                        <span class="skill-stars">⭐⭐⭐⭐</span>
+                    </li>
+                </ul>
             </div>
-            <div class="education-item">
-                <h3>硕士</h3>
-                <p>哈尔滨工业大学（深圳） - 控制科学与工程 (2024/09--至今)</p>
-            </div>
-            <div class="education-item">
-                <h3>本科</h3>
-                <p>哈尔滨工业大学（深圳） - 自动化 (2020/09--2024/06)</p>
-            </div>
-        </section>
 
-        <section class="profile-section">
-            <h2 class="section-title">技能</h2>
-            <div class="skill-item">
-                <div class="skill-rating">
-                    <span>Python</span>
-                    <span class="star">⭐⭐⭐⭐</span>
+            <div class="sidebar-section">
+                <h2 class="sidebar-section-title">Links</h2>
+                <div class="social-links">
+                    <a href="https://github.com/ZorAttC" target="_blank" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/your-profile" target="_blank" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:your-email@example.com" title="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
                 </div>
             </div>
-            <div class="skill-item">
-                <div class="skill-rating">
-                    <span>C++</span>
-                    <span class="star">⭐⭐⭐</span>
-                </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-rating">
-                    <span>Pytorch</span>
-                    <span class="star">⭐⭐⭐</span>
-                </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-rating">
-                    <span>ROS</span>
-                    <span class="star">⭐⭐⭐⭐</span>
-                </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-rating">
-                    <span>CMake/xmake</span>
-                    <span class="star">⭐⭐⭐</span>
-                </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-rating">
-                    <span>OpenGL</span>
-                    <span class="star">⭐⭐</span>
-                </div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-rating">
-                    <span>Web开发(JS/HTML/CSS)</span>
-                    <span class="star">⭐⭐</span>
-                </div>
-            </div>
-        </section>
+        </aside>
 
-        <section class="profile-section">
-            <h2 class="section-title">项目经历</h2>
-            <div class="project-grid">
-                <div class="project-card">
-                    <h3>Apple Vision Pro Teleoperation</h3>
-                    <div class="video-container">
-                        <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=113062933695302&bvid=BV173Hqe2EW3&cid=25694374217&p=1" scrolling="no" border="0" frameborder="0" framespacing="0"></iframe>
+        <main class="main-content">
+            <div class="content-section">
+                <div class="section-header">
+                    <i class="fas fa-user section-icon"></i>
+                    <h2 class="section-title">About Me</h2>
+                </div>
+                <p>Hello. I am now living in Guangdong, ShenZhen, pursuing my Master's degree in Control Science and Engineering in <strong>Harbin Institute of Technology(ShenZhen)</strong>. Also,I received my bachelor's degree from HITSZ. Now I am a member of <a href="https://www.nrs-lab.com/" target="_blank">nROS-lab</a>, who is doing research and projects on <strong>Vision-Language-Action Model</strong> and <strong>Open-vocabulary Mobile Manipulation</strong>.</p>
+            </div>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <i class="fas fa-graduation-cap section-icon"></i>
+                    <h2 class="section-title">
+                        Education and Internship
+                        <div class="section-title-avatar">
+                            <img src="images/my_cartoon_avatar.png" alt="Avatar">
+                        </div>
+                    </h2>
+                </div>
+                <div class="education-section">
+                    <div class="education-content">
+                        <div class="education-timeline">
+                            <div class="timeline-item">
+                                <h3>Internship</h3>
+                                <p>
+                                    <span class="company-info">
+                                        <a href="https://www.limxdynamics.com/en" target="_blank" class="company-link"><strong>LimX Dynamics</strong></a> - Embodied AI and Manipulation Group
+                                    </span>
+                                    <span class="timeline-date">Nov 2024 - Apr 2025</span>
+                                </p>
+                            </div>
+                            <div class="timeline-item">
+                                <h3>Master's</h3>
+                                <p>
+                                    <span class="company-info">
+                                        <strong>Harbin Institute of Technology (Shenzhnen)</strong> - Control Science and Engineering <a href="https://www.nrs-lab.com/" target="_blank">@nROS-lab</a>
+                                    </span>
+                                    <span class="timeline-date">Sep 2024 - Present</span>
+                                </p>
+                            </div>
+                            <div class="timeline-item">
+                                <h3>Bachelor's</h3>
+                                <p>
+                                    <span class="company-info">
+                                        <strong>Harbin Institute of Technology (Shenzhnen)</strong> - Automation <a href="https://www.nrs-lab.com/" target="_blank">@nROS-lab</a>
+                                    </span>
+                                    <span class="timeline-date">Sep 2020 - Jun 2024</span>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <p>我们实现了TeleVison的演示。使用realman RM65机械臂和Inspire灵巧手构建实验平台。遥操作系统可用于收集双臂移动平台的关节和传感器数据，用于模仿学习和具身AI。手部重定向使用dexipilot解决。消息通信通过gRPC实现。相机流媒体依赖于WebRTC。</p>
-                </div>
-
-                <div class="project-card">
-                    <h3>LimX VGM</h3>
-                    <div class="video-container">
-                        <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114001769930414&bvid=BV1GHKKeyE1N&cid=28388295236&p=1" scrolling="no" border="0" frameborder="0" framespacing="0"></iframe>
-                    </div>
-                    <p>基于视频生成大模型的具身操作算法LimX VGM：通过对现有视频生成大模型进行人类操作视频数据的后训练，仅需场景图像和操作任务指令作为提示，即可实现任务理解和分解、物体操作轨迹生成、机器人操作执行的全过程。整个过程使用零真实机器样本数据，实现跨多平台的泛化。这是国内首次将人类操作数据直接应用于机器人操作。</p>
-                </div>
-
-                <div class="project-card">
-                    <h3>VR沉浸式可视化</h3>
-                    <div class="video-container">
-                        <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=706447463&bvid=BV1eQ4y1t7cz&cid=1345809450&p=1" scrolling="no" border="0" frameborder="0" framespacing="0"></iframe>
-                    </div>
-                    <p>对于复杂和危险的灾后场景，有时现有机器人的自主智能无法完全依赖，需要人工干预。我们使用R3LIVE作为里程计，为VR用户提供RGB彩色点云，实时可视化机器人所在场景。我使用OpenXR进行VR开发编程，实现高性能渲染。</p>
-                </div>
-
-                <div class="project-card">
-                    <h3>摄像头环视拼接</h3>
-                    <img src="../pics/sparklink.png" alt="摄像头环视拼接" style="width:100%;">
-                    <p>首届"星闪杯"高校应用挑战赛是面向高校开发者的命题应用挑战赛，由国际星闪联盟联合多所高校联合举办。赛题为摄像头环视拼接系统的开发，在指定平台上完成无人车鸟瞰图的融合拼接，要求拼接处无明显痕迹，图像全局亮度均衡，图像无明显畸变，无明显延时，运行流畅稳定。我们使用C++进行程序开发，并且进行了多线程优化与CUDA加速，最终实现了每帧28ms的处理速度。来自哈尔滨工业大学（深圳）的1504Ders队获得了首届"星闪杯"高校应用挑战赛的全国第二名。</p>
-                </div>
-
-                <div class="project-card">
-                    <h3>Tetris Robot</h3>
-                    <div class="video-container">
-                        <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=613376126&bvid=BV1Uh4y1J7hN&cid=1124218431&p=1" scrolling="no" border="0" frameborder="0" framespacing="0"></iframe>
-                    </div>
-                    <p>我们创建了一个玩俄罗斯方块的机器人。使用机械臂和RGB相机，它能够根据指定规则拾取俄罗斯方块并将其放置在盘子上。</p>
                 </div>
             </div>
-        </section>
 
-        <section class="profile-section">
-            <h2 class="section-title">发表论文</h2>
-            <div class="publication-item">
-                <h3>Real-Time LiDAR Point Cloud Compression and Transmission for Resource-constrained Robots</h3>
-                <p><em>Yuhao Cao, Yu Wang and Haoyao Chen (ICRA2025 accepted)</em></p>
-                <p>
-                    <a href="https://github.com/ZorAttC/RCPCC">arxiv</a> |
-                    <a href="https://www.bilibili.com/video/BV1XrZHYqEBE/?vd_source=5afc90db9c8787a059e3d9c402d20d33">bilibili</a> |
-                    <a href="https://github.com/HITSZ-NRSL/RCPCC">github</a>
-                </p>
+            <div class="content-section">
+                <div class="section-header">
+                    <i class="fas fa-project-diagram section-icon"></i>
+                    <h2 class="section-title">Projects</h2>
+                </div>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <div class="project-media">
+                            <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=113062933695302&bvid=BV173Hqe2EW3&cid=25694374217&p=1" scrolling="no" border="0" frameborder="0" framespacing="0"></iframe>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Apple Vision Pro Teleoperation</h3>
+                            <p class="project-description">We implemented the Demo of <a href="https://github.com/unitreerobotics/avp_teleoperate" target="_blank">TeleVison</a>. We use the realman RM65 arm and the Inspire dexterous hand to build the experiment platform.The teleoperation system can be used to collect dual arm mobile platform joints and sensors data for imitation learning and embodied AI. Hand retargeting is solved using <a href="https://github.com/dexsuite/dex-retargeting" target="_blank">dexipilot</a>.The message communication is implemented by <a href="https://grpc.io" target="_blank">gRPC</a>. The camera streaming relys on the <a href="https://webrtc.org/?hl=zh-cn" target="_blank">webrtc</a>.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-media">
+                            <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114001769930414&bvid=BV1GHKKeyE1N&cid=28388295236&p=1" scrolling="no" border="0" frameborder="0" framespacing="0"></iframe>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">LimX VGM</h3>
+                            <p class="project-description">LimX VGM: A Video Generation Model for Embodied Manipulation. By fine-tuning existing video generation models with human manipulation data, it can achieve task understanding, decomposition, object manipulation trajectory generation, and robot execution with only scene images and task instructions as prompts. The entire process uses zero real robot sample data, achieving generalization across multiple platforms. This is the first time in China that human manipulation data has been directly applied to robot manipulation.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-media">
+                            <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=706447463&bvid=BV1eQ4y1t7cz&cid=1345809450&p=1" scrolling="no" border="0" frameborder="0" framespacing="0"></iframe>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">VR Immersive Visualization</h3>
+                            <p class="project-description">For complex and dangerous post-disaster scenarios, sometimes the autonomous intelligence of existing robots cannot be fully relied upon, requiring human intervention. We use R3LIVE as the odometry to provide RGB colored point clouds for VR users, enabling real-time visualization of the robot's environment. I use OpenXR for VR development programming to achieve high-performance rendering.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-media">
+                            <img src="images/sparklink.png" alt="摄像头环视拼接" style="width:100%;">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Camera Surround View Stitching</h3>
+                            <p class="project-description">The first "SparkLink Cup" University Application Challenge is a themed application challenge for university developers, jointly organized by the International SparkLink Alliance and multiple universities. The competition topic is the development of a camera surround view stitching system, requiring the completion of unmanned vehicle bird's-eye view fusion and stitching on a specified platform. The requirements include no obvious traces at stitching points, balanced global image brightness, no obvious distortion, no obvious delay, and smooth and stable operation. We use C++ for program development and have optimized multi-threading and CUDA acceleration, ultimately achieving a processing speed of 28ms per frame. Team 1504Ders from Harbin Institute of Technology (Shenzhen) won the second place in the first "SparkLink Cup" University Application Challenge.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-media">
+                            <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=613376126&bvid=BV1Uh4y1J7hN&cid=1124218431&p=1" scrolling="no" border="0" frameborder="0" framespacing="0"></iframe>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Tetris Robot</h3>
+                            <p class="project-description">We created a robot that plays Tetris. Using a robotic arm and an RGB camera, it can pick up Tetris pieces and place them on the board according to specified rules.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
+
+            <div class="content-section">
+                <div class="section-header">
+                    <i class="fas fa-file-alt section-icon"></i>
+                    <h2 class="section-title">Publications</h2>
+                </div>
+                <div class="publication-card">
+                    <h3 class="publication-title">Real-Time LiDAR Point Cloud Compression and Transmission for Resource-constrained Robots</h3>
+                    <p class="publication-meta"><em>Yuhao Cao, Yu Wang and Haoyao Chen (ICRA2025 accepted)</em></p>
+                    <div class="project-media" style="margin: 20px 0;">
+                        <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=114257538648123&bvid=BV1XrZHYqEBE&cid=29169945585&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+                    </div>
+                    <div class="publication-links">
+                        <a href="https://github.com/ZorAttC/RCPCC">arxiv</a>
+                        <a href="https://www.bilibili.com/video/BV1XrZHYqEBE/?vd_source=5afc90db9c8787a059e3d9c402d20d33">bilibili</a>
+                        <a href="https://github.com/HITSZ-NRSL/RCPCC">github</a>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </body>
 </html> 

@@ -1,0 +1,10 @@
+author:
+  # Biographic information
+  avatar           : "profile.jpg"
+  name             : "曹宇豪 Yuhao Cao"
+  pronouns         : # example: "she/her"  
+  bio              : "Intrested in DL&RL and robotics."
+  location         : "Shenzhen, China"
+  employer         : "Harbin Institute of Technology"
+  uri              : # URL
+  email            : "1720049199@qq.com" 
