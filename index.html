@@ -527,16 +527,6 @@
                 max-width: 100%;
             }
         }
-         #clstr_globe,
-        #clstr_globe iframe,
-        #clstr_globe div {
-            width: 150px !important;
-            height: 150px !important;
-            display: inline-block !important;
-            margin: 0 !important;
-            transform: scale(0.8) !important;
-            transform-origin: center center !important;
-        }
 
         .footer-container {
             display: flex;
@@ -545,6 +535,12 @@
             padding: 20px;
             background-color: #f8f9fa;
             border-top: 1px solid #e9ecef;
+        }
+
+        #clustrmaps-widget {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .copyright-info {
@@ -747,9 +743,9 @@
                 </div>
             </div>
             <div class="footer-container">
-                <div id="clustrmaps-widget" style="width:5%">
+                <div id="clustrmaps-widget" style="width:20%">
                 <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=ITBWzKy9sPtKpvKrN0jZp3xEYvftdSRGTV9O3wHSiVw"></script>
-            </div> 
+                 </div> 
                 <div class="copyright-info">
                     <p>© 2024 ZorAttC. All rights reserved.</p>
                     <p>Last updated: <span id="lastUpdated"></span></p>
